@@ -132,7 +132,7 @@ def conv_net(x, keep_prob):
     
     conv = conv2d_maxpool(x, 64, [5,5], [1,1], [2,2], [2,2])
 
-    #conv = tf.nn.dropout(conv, keep_prob)
+    conv = tf.nn.dropout(conv, keep_prob)
     conv = conv2d_maxpool(conv, 128, [5,5],[1,1],[2,2],[2,2])
     conv = conv2d_maxpool(conv, 256, [3,3],[1,1],[2,2],[2,2])
     conv = tf.nn.dropout(conv, keep_prob)
@@ -144,6 +144,7 @@ def conv_net(x, keep_prob):
 
     #fc = tf.nn.dropout(fc, keep_prob)
     fc = fully_conn(fc, 1024)
+    #logits = output(fc, 10)
     fc = fully_conn(fc, 512)
     fc = tf.nn.dropout(fc, keep_prob)
     
@@ -246,8 +247,8 @@ def train(model = None, epochs = 1, n_batches = 5, batch_size = 64, keep_probabi
 
 # In[1]:
 #train(n_batches=1)
-train(epochs = 16, n_batches=5, keep_probability=0.8)
-#train(epochs = 8, model = save_model_path, n_batches=5)
+#train(epochs = 16, n_batches=5, keep_probability=0.8)
+train(epochs = 8, n_batches=5, keep_probability=0.8, model = save_model_path)
 
 
 """
